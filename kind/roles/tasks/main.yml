@@ -1,10 +1,13 @@
 ---
 # ####################################################################
-#                             Prerequisites
+#                             Docker
 # ####################################################################
 
-- name: Prerequisites
-  include_tasks: prerequisites.yml
+- name: Docker
+  include_tasks: 
+    file: docker.yml
+    apply:
+      tags: install
   tags:
     - install
 
@@ -12,25 +15,45 @@
 #                             Install kind
 # ####################################################################
 
-- name: Install kind
-  include_tasks: install.yml
-  tags:
-    - install
+- name: Kind
+  include_tasks: 
+    file: kind.yml
+    apply:
+      tags: install
+  tags: install
 
 # ####################################################################
 #                             Create cluster
 # ####################################################################
 
 - name: Create cluster {{ cluster_name }}
-  include_tasks: create-cluster.yml
+  include_tasks: 
+    file: create.yml
+    apply:
+      tags: create
   tags:
     - create
+
+# ####################################################################
+#                             Create Nginx Ingress
+# ####################################################################
+
+- name: Create Nginx Ingress resource
+  include_tasks: 
+    file: ingress.yml
+    apply:
+      tags: ingress
+  tags:
+    - ingress
 
 # ####################################################################
 #                             Delete cluster
 # ####################################################################
 
 - name: Delete cluster {{ cluster_name }}
-  include_tasks: delete-cluster.yml
+  include_tasks: 
+    file: delete.yml
+    apply:
+      tags: delete
   tags:
     - delete
