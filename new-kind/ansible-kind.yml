@@ -2,4 +2,4 @@
   become_user: root
 
   roles:
-   - roles/ansible-kind
+   - roles/

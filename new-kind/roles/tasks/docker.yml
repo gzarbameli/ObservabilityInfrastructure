@@ -17,7 +17,7 @@
     mode: '0755'
 
 - name: Download Docker GPG key
-  shell: "curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
+  shell: "curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
   args:
     creates: /etc/apt/keyrings/docker.gpg
 
