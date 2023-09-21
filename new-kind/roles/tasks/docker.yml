@@ -52,3 +52,8 @@
     state: present
     update_cache: true
   become: true
+
+- name: Start service Docker, if not started
+  ansible.builtin.service:
+    name: docker
+    state: started
