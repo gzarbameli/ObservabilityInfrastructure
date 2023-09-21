@@ -1,0 +1,6 @@
+---
+
+- name: Install Kind
+  shell: curl -Lo /usr/local/bin/kind https://kind.sigs.k8s.io/dl/{{ kind_version }}/kind-linux-amd64 && chmod +x /usr/local/bin/kind
+  args:
+    creates: /usr/local/bin/kind
