@@ -26,8 +26,12 @@
     path: /etc/apt/keyrings/docker.gpg
     mode: '0644'
 
-- name: Get Debian codename
-  command: echo $(. /etc/os-release && echo $VERSION_CODENAME)
+- name: Ottieni il codename di Debian
+  script:
+    cmd: |
+      #!/bin/bash
+      source /etc/os-release
+      echo "$VERSION_CODENAME"
   register: debian_codename
 
 - name: Get system arch
