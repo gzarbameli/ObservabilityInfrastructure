@@ -26,11 +26,19 @@
     path: /etc/apt/keyrings/docker.gpg
     mode: '0644'
 
-- name: Add Docker repository to Apt sources
+- name: Get Debian codename
+  command: . /etc/os-release && echo $VERSION_CODENAME
+  register: debian_codename
+
+- name: Get system arch
+  command: dpkg --print-architecture
+  register: system_architecture
+
+- name: Add Docker APT Repository
   lineinfile:
     path: /etc/apt/sources.list.d/docker.list
     line: |
-      deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable
+      deb [arch="{{ system_architecture.stdout }}" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian "{{ debian_codename.stdout }}" stable
     create: yes
 
 - name: Update APT cache after adding repository
