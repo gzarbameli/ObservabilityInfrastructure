@@ -5,7 +5,6 @@ required_packages:
   - curl
   - gnupg
   - lsb-release
-  - kubectl
 
 docker_packages:
   - docker-ce
