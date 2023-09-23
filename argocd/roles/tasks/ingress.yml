@@ -1,0 +1,10 @@
+---
+
+- name: Copy ArgoCD Ingress config template
+  template:
+    src: "{{ role_path }}/templates/argocd-ingress-config.yaml.j2"
+    dest: "/tmp/argocd-ingress-config.yaml.j2"
+    mode: 0644
+
+- name: Apply config 
+  shell: "kubectl apply -f /tmp/argocd-ingress-config.yaml.j2 -n argocd"

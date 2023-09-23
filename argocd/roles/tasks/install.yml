@@ -1,0 +1,17 @@
+---
+
+- name: Check existence of kubectl
+  command: "which kubectl"
+  register: kubectl_check
+  ignore_errors: true
+
+- name: Exit code of which kubectl
+  fail:
+    msg: "kubectl is not installed!"
+  when: kubectl_check.rc != 0
+
+- name: Create ArgoCD namespace 
+  shell: "kubectl create namespace argocd"
+
+- name: Create ArgoCD resources 
+  shell: "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
