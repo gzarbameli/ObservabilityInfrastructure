@@ -21,7 +21,8 @@
 
 - name: Install kubectl
   copy:
-    remote_src: /tmp/kubectl
+    remote_src: false
+    src: /tmp/kubectl
     dest: /usr/local/bin/kubectl
     owner: root
     group: root
