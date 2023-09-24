@@ -13,3 +13,11 @@
   debug:
     msg: "Cluster creation of kind cluster {{ cluster_name }} has been finished."
 
+- name: Get Cluster Kubeconfig
+  shell: "kind get kubeconfig --name {{ cluster_name }}"
+  register: kubeconfig
+
+- name: Copy Kubeconfig in /tmp
+  copy:
+    content: "{{ kubeconfig.stdout }}"
+    dest: /tmp/kubeconfig.yml
