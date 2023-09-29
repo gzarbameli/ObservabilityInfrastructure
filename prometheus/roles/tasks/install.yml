@@ -1,0 +1,16 @@
+---
+- name: install pre-requisites
+  shell: "pip3 install --ignore-installed openshift pyyaml kubernetes"
+
+- name: Create Prometheus namespace 
+  shell: "kubectl create namespace prometheus"
+
+- name: Create Prometheus resources
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', item) | from_yaml_all }}"
+    state: present
+  loop:
+    - '{{ role_path }}/templates/cluster-role.yaml.j2'
+    - '{{ role_path }}/templates/config-map.yaml.j2'
+    - '{{ role_path }}/templates/deployment.yaml.j2'
+    - '{{ role_path }}/templates/service.yaml.j2'

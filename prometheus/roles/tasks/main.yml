@@ -1,0 +1,21 @@
+# ####################################################################
+#                 Deploy Prometheus Resources
+# ####################################################################
+
+- name: Prometheus Instance
+  include_tasks: 
+    file: install.yml
+    apply:
+      tags: install
+  tags: install
+
+# ####################################################################
+#                      Create Prometheus Ingress
+# ####################################################################
+
+- name: Prometheus Ingress
+  include_tasks: 
+    file: ingress.yml
+    apply:
+      tags: ingress
+  tags: ingress
