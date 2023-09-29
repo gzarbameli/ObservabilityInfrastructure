@@ -7,7 +7,7 @@
 
 - name: Apply CRDs
   kubernetes.core.k8s:
-    definition: "{{ lookup('file', '{{ role_path }}/templates/crds/jaegers_crd.yaml.j2') | from_yaml_all }}"
+    definition: "{{ lookup('template', '{{ role_path }}/templates/crds/jaegers_crd.yaml.j2') }}"
     state: present
 
 - name: Apply Jaeger Operator items
