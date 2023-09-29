@@ -4,7 +4,8 @@
     name:
       - openshift
       - pyyaml
-      - kubernetes 
+      - kubernetes
+    executable: pip3
 
 - name: Create Jaeger namespace 
   shell: "kubectl create namespace jaeger"
