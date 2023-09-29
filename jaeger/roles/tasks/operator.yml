@@ -1,11 +1,6 @@
 ---
 - name: install pre-requisites
-  pip:
-    name:
-      - openshift
-      - pyyaml
-      - kubernetes
-    executable: pip3
+  shell: "pip3 install --ignore-installed openshift pyyaml kubernetes"
 
 - name: Create Jaeger namespace 
   shell: "kubectl create namespace jaeger"
