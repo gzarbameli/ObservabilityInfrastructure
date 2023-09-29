@@ -1,7 +1,7 @@
 ---
 
 - name: Configure Jaeger All-In-One Instance
-  k8s:
-    definition: "{{ lookup('template', '{{ role_path }}/templates/instance/jaeger.yaml.j2') }}"
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', '{{ role_path }}/templates/instance/jaeger.yaml.j2') | from_yaml_all }}"
     state: present
     namespace: jaeger

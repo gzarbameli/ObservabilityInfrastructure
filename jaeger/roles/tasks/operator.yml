@@ -11,8 +11,8 @@
     state: present
 
 - name: Apply Jaeger Operator items
-  k8s:
-    definition: "{{ lookup('template', item) }}"
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', item) | from_yaml_all }}"
     state: present
     namespace: jaeger
   loop:
@@ -22,8 +22,8 @@
     - '{{ role_path }}/templates/operator/operator.yaml.j2'
 
 - name: Apply Operator Cluster-Wide Permissions
-  k8s:
-    definition: "{{ lookup('template', item) }}"
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', item) | from_yaml_all }}"
     state: present
   loop:
     - '{{ role_path }}/templates/operator-cluster-wide-permissions/cluster_role_binding.yaml.j2'
