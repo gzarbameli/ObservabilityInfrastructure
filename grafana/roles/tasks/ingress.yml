@@ -1,0 +1,5 @@
+---
+- name: Create Grafana Ingress
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', '{{ role_path }}/templates/ingress.yaml.j2') | from_yaml_all }}"
+    state: present

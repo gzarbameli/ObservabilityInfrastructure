@@ -1,0 +1,14 @@
+---
+
+- name: Create Grafana namespace 
+  shell: "kubectl create namespace grafana"
+
+- name: Apply grafana Operator items
+  kubernetes.core.k8s:
+    definition: "{{ lookup('template', item) | from_yaml_all }}"
+    state: present
+    namespace: grafana
+  loop:
+    - '{{ role_path }}/templates/grafana-datasources.yaml.j2'
+    - '{{ role_path }}/templates/deployment.yaml.j2'
+    - '{{ role_path }}/templates/service.yaml.j2'
