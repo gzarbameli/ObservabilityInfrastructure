@@ -1,4 +1,10 @@
 ---
+- name: install pre-requisites
+  pip:
+    name:
+      - openshift
+      - pyyaml
+      - kubernetes 
 
 - name: Create Jaeger namespace 
   shell: "kubectl create namespace jaeger"
