@@ -1,0 +1,33 @@
+---
+# ####################################################################
+#                   Install CRD and Jaeger Operator
+# ####################################################################
+
+- name: CRD and Jaeger Operator
+  include_tasks: 
+    file: operator.yml
+    apply:
+      tags: operator
+  tags: operator
+
+# ####################################################################
+#                 Deploy Jaeger instance (All-In-One)
+# ####################################################################
+
+- name: Jaeger Instance
+  include_tasks: 
+    file: instance.yml
+    apply:
+      tags: instance
+  tags: instance
+
+# ####################################################################
+#                      Create Ingress Jaeger
+# ####################################################################
+
+- name: Jaeger Ingress
+  include_tasks: 
+    file: ingress.yml
+    apply:
+      tags: ingress
+  tags: ingress

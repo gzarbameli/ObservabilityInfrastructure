@@ -1,0 +1,7 @@
+---
+
+- name: Apply CRDs
+  k8s:
+    definition: "{{ lookup('template', '{{ role_path }}/templates/ingress/ingress.yaml.j2') }}"
+    state: present
+    namespace: jaeger

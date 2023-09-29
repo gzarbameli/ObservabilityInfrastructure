@@ -1,0 +1,28 @@
+---
+
+- name: Create Jaeger namespace 
+  shell: "kubectl create namespace jaeger"
+
+- name: Apply CRDs
+  k8s:
+    definition: "{{ lookup('template', '{{ role_path }}/templates/crds/jaegers_crd.yaml.j2') }}"
+    state: present
+
+- name: Apply Jaeger Operator items
+  k8s:
+    definition: "{{ lookup('template', item) }}"
+    state: present
+    namespace: jaeger
+  loop:
+    - '{{ role_path }}/templates/operator/service_account.yaml.j2'
+    - '{{ role_path }}/templates/operator/role.yaml.j2'
+    - '{{ role_path }}/templates/operator/role_binding.yaml.j2'
+    - '{{ role_path }}/templates/operator/operator.yaml.j2'
+
+- name: Apply Operator Cluster-Wide Permissions
+  k8s:
+    definition: "{{ lookup('template', item) }}"
+    state: present
+  loop:
+    - '{{ role_path }}/templates/operator-cluster-wide-permissions/cluster_role_binding.yaml.j2'
+    - '{{ role_path }}/templates/operator-cluster-wide-permissions/cluster_role.yaml.j2'
