@@ -6,7 +6,7 @@
   shell: "kubectl create namespace jaeger"
 
 - name: Apply CRDs
-  k8s:
+  kubernetes.core.k8s:
     definition: "{{ lookup('file', '{{ role_path }}/templates/crds/jaegers_crd.yaml.j2') | from_yaml_all }}"
     state: present
 
