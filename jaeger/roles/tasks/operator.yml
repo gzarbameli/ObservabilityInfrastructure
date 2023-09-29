@@ -7,7 +7,7 @@
 
 - name: Apply CRDs
   k8s:
-    definition: "{{ lookup('file', '{{ role_path }}/templates/crds/jaegers_crd.yaml.j2') }}"
+    definition: "{{ lookup('file', '{{ role_path }}/templates/crds/jaegers_crd.yaml.j2') | from_yaml_all }}"
     state: present
 
 - name: Apply Jaeger Operator items
