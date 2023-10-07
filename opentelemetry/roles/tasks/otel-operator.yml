@@ -1,0 +1,25 @@
+---
+
+- name: Create OTel Operator namespace 
+  kubernetes.core.k8s:
+    name: opentelemetry-operator-system
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Add Helm Repo 
+  kubernetes.core.helm_repository:
+    name: open-telemetry
+    repo_url: "https://open-telemetry.github.io/opentelemetry-helm-charts"
+
+- name: Install OpenTelemetry Operator
+  kubernetes.core.helm:
+    name: my-opentelemetry-operator
+    chart_repo: open-telemetry/opentelemetry-operator
+    state: present
+    release_namespace: opentelemetry-operator-system
+    set:
+      - name: admissionWebhooks.certManager.enabled
+        value: "false"
+      - name: admissionWebhooks.certManager.autoGenerateCert
+        value: "true"

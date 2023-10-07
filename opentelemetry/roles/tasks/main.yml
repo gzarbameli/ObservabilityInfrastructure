@@ -1,0 +1,21 @@
+# ####################################################################
+#                 Deploy OpenTelemetry Operator
+# ####################################################################
+
+- name: OTel Operator
+  include_tasks: 
+    file: otel-operator.yml
+    apply:
+      tags: operator
+  tags: operator
+
+# ####################################################################
+#                      Deploy OpenTelemetry Collector
+# ####################################################################
+
+- name: OTel Collector
+  include_tasks: 
+    file: otel-collector.yml
+    apply:
+      tags: collector
+  tags: collector
