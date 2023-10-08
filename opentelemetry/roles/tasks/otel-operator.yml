@@ -15,7 +15,7 @@
 - name: Install OpenTelemetry Operator
   kubernetes.core.helm:
     name: my-opentelemetry-operator
-    chart_repo: open-telemetry/opentelemetry-operator
+    chart_ref: open-telemetry/opentelemetry-operator
     state: present
     release_namespace: opentelemetry-operator-system
     set:
