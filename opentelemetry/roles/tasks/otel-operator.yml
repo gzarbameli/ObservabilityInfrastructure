@@ -19,5 +19,7 @@
     state: present
     release_namespace: opentelemetry-operator-system
     release_values:
-      - "admissionWebhooks.certManager.enabled=false"
-      - "admissionWebhooks.certManager.autoGenerateCert=true"
+      - admissionWebhooks:
+          certManager:
+            enabled: "false"
+            autoGenerateCert: "true"
