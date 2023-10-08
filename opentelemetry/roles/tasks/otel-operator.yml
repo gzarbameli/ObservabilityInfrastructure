@@ -18,8 +18,6 @@
     chart_ref: open-telemetry/opentelemetry-operator
     state: present
     release_namespace: opentelemetry-operator-system
-    set:
-      - name: admissionWebhooks.certManager.enabled
-        value: "false"
-      - name: admissionWebhooks.certManager.autoGenerateCert
-        value: "true"
+    release_values:
+      - "admissionWebhooks.certManager.enabled=false"
+      - "admissionWebhooks.certManager.autoGenerateCert=true"
