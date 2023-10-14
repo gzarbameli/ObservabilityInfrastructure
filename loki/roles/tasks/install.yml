@@ -21,6 +21,6 @@
     state: present
     release_namespace: loki
     update_repo_cache: true
-    values: "{{ lookup('template', '{{ role_path }}/templates/values.yaml.j2') | from_yaml }}"
+    values: "{{ lookup('template', '{{ role_path }}/templates/values.yaml') | from_yaml }}"
 
 
