@@ -1,0 +1,12 @@
+---
+# ####################################################################
+#                             Install Loki and Promtail
+# ####################################################################
+
+- name: Install Loki and Promtail
+  include_tasks: 
+    file: install.yml
+    apply:
+      tags: install
+  tags:
+    - install
